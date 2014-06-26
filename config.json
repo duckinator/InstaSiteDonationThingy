@@ -1,0 +1,9 @@
+{
+"paypal":{"email": "me@marie.so"},
+"dwolla":{"username": "duckinator"},
+"moonclerk":{"url":"[MoonClerk]"},
+"amazon-payments":{"??":"[Amazon Payments]"},
+"google-wallet":{"??":"[Google Wallet]"},
+"venmo":{"username":"duckinator"},
+"patreon":{"??":"[Patreon]"}
+}
