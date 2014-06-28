@@ -7,83 +7,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.min.js"></script>
 <script src="app.js"></script>
 
-<style>
-.venmo-widget, .venmo-widget > *, .venmo-widget option {
-  background: white;
-  border: 0px #3F94D0 solid;
-  color: #3F94D0;
-  height: 24px;
-
-  font-weight: 400;
-  font-size: 16px;
-  padding: 0;
-}
-
-.venmo-widget {
-  position: relative;
-  display: inline-block;
-  border-width: 1px;
-  border-radius: 4px;
-
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-.venmo-widget .venmo-logo {
-  display: inline-block;
-
-  background: url('https://platform.venmo.com/public/images/venmo_v_blue.png');
-  background-position: 50% center;
-  background-size: 14px auto;
-  background-repeat: no-repeat;
-
-  width: 24px;
-
-  border-right-width: 1px;
-}
-
-.venmo-widget select,.venmo-widget option {
-  vertical-align: top;
-}
-
-.venmo-widget option {
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-
-.venmo-widget input[type="submit"] {
-  padding: 0 4px;
-  vertical-align: top;
-  border-radius: 0 4px 4px 0;
-  border-width: 0;
-  border-left-width: 1px;
-  min-width: 70px;
-  cursor: pointer;
-}
-
-.venmo-widget input[type="submit"]:hover,
-.venmo-widget input[type="submit"]:focus {
-  box-shadow:  2px  2px 0px 0px #76b2dd inset,
-              -2px -2px 0px 0px #76b2dd inset,
-               1px  1px 0px 0px #5aa3d7 inset,
-              -1px -1px 0px 0px #5aa3d7 inset;
-}
-
-button::-moz-focus-inner, input::-moz-focus-inner,
-select::-moz-focus-inner, option::-moz-focus-inner {
-  padding: 0;
-  margin: 0;
-  border: 0;
-  
-}
-</style>
+<link href="app.css" media="all" rel="stylesheet" type="text/css">
 
 </head>
 <body ng-app="instaSiteDonationThingy">
 
+<p>One-offs:</p>
+
 <div paypal-widget></div>
 
 <div venmo-widget></div>
+
+<p>Recurring:</p>
+
+<div paypal-recurring-widget></div>
 
 <!-- TEMPLATES. TEMPLATES EVERYWHEREEEEEEeeeeee -->
 
@@ -95,7 +32,7 @@ select::-moz-focus-inner, option::-moz-focus-inner {
     <select name="amount">
       <option value="5.00">$5</option>
       <option value="10.00">$10</option>
-      <option value="15.00">$15</option>
+      <option value="15.00" selected>$15</option>
       <option value="25.00">$25</option>
       <option value="35.00">$35</option>
       <option value="50.00">$50</option>
@@ -104,10 +41,75 @@ select::-moz-focus-inner, option::-moz-focus-inner {
     </select>
     <input type="hidden" name="currency_code" value="USD">
     <input type="hidden" name="no_note" value="0">
-    <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
-    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest">
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
     <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
   </form>
+</script>
+
+<script type="text/html" id="paypal-recurring-template">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-widget recurring">
+  <input type="hidden" name="cmd" value="_xclick-subscriptions">
+  <input type="hidden" name="business" value="9NP5BQJF9VK38">
+  <input type="hidden" name="lc" value="US">
+  <input type="hidden" name="no_note" value="1">
+  <input type="hidden" name="no_shipping" value="1">
+  <input type="hidden" name="src" value="1">
+  <input type="hidden" name="currency_code" value="USD">
+  <input type="hidden" name="bn" value="PP-SubscriptionsBF:btn_subscribe_LG.gif:NonHosted">
+  <input type="hidden" name="on0" value="">
+  <select name="os0">
+    <option value="Option 1">$1.00 USD/week</option>
+    <option value="Option 2">$2.00 USD/week</option>
+    <option value="Option 3">$5.00 USD/week</option>
+    <option value="Option 4">$10.00 USD/week</option>
+    <option value="Option 5" selected>$15.00 USD/week</option>
+    <option value="Option 6">$25.00 USD/week</option>
+    <option value="Option 7">$35.00 USD/week</option>
+    <option value="Option 8">$50.00 USD/week</option>
+    <option value="Option 9">$100.00 USD/week</option>
+  </select>
+  <input type="hidden" name="currency_code" value="USD">
+  <input type="hidden" name="option_select0" value="Option 1">
+  <input type="hidden" name="option_amount0" value="1.00">
+  <input type="hidden" name="option_period0" value="W">
+  <input type="hidden" name="option_frequency0" value="1">
+  <input type="hidden" name="option_select1" value="Option 2">
+  <input type="hidden" name="option_amount1" value="2.00">
+  <input type="hidden" name="option_period1" value="W">
+  <input type="hidden" name="option_frequency1" value="1">
+  <input type="hidden" name="option_select2" value="Option 3">
+  <input type="hidden" name="option_amount2" value="5.00">
+  <input type="hidden" name="option_period2" value="W">
+  <input type="hidden" name="option_frequency2" value="1">
+  <input type="hidden" name="option_select3" value="Option 4">
+  <input type="hidden" name="option_amount3" value="10.00">
+  <input type="hidden" name="option_period3" value="W">
+  <input type="hidden" name="option_frequency3" value="1">
+  <input type="hidden" name="option_select4" value="Option 5">
+  <input type="hidden" name="option_amount4" value="15.00">
+  <input type="hidden" name="option_period4" value="W">
+  <input type="hidden" name="option_frequency4" value="1">
+  <input type="hidden" name="option_select5" value="Option 6">
+  <input type="hidden" name="option_amount5" value="25.00">
+  <input type="hidden" name="option_period5" value="W">
+  <input type="hidden" name="option_frequency5" value="1">
+  <input type="hidden" name="option_select6" value="Option 7">
+  <input type="hidden" name="option_amount6" value="35.00">
+  <input type="hidden" name="option_period6" value="W">
+  <input type="hidden" name="option_frequency6" value="1">
+  <input type="hidden" name="option_select7" value="Option 8">
+  <input type="hidden" name="option_amount7" value="50.00">
+  <input type="hidden" name="option_period7" value="W">
+  <input type="hidden" name="option_frequency7" value="1">
+  <input type="hidden" name="option_select8" value="Option 9">
+  <input type="hidden" name="option_amount8" value="100.00">
+  <input type="hidden" name="option_period8" value="W">
+  <input type="hidden" name="option_frequency8" value="1">
+  <input type="hidden" name="option_index" value="0">
+  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribe_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
 </script>
 
 <script type="text/html" id="dwolla-template">
@@ -132,14 +134,13 @@ select::-moz-focus-inner, option::-moz-focus-inner {
     <select name="amount">
       <option value="5.00">$5</option>
       <option value="10.00">$10</option>
-      <option value="15.00">$15</option>
+      <option value="15.00" selected>$15</option>
       <option value="25.00">$25</option>
       <option value="35.00">$35</option>
       <option value="50.00">$50</option>
       <option value="75.00">$75</option>
       <option value="100.00">$100</option>
     </select>
-    <!--<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">-->
     <input type="submit" value="Venmo Me">
   </form>
 </script>

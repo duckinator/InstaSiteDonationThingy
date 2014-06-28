@@ -1,0 +1,75 @@
+button::-moz-focus-inner, input::-moz-focus-inner,
+select::-moz-focus-inner, option::-moz-focus-inner {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+/* Venmo Widgets */
+
+.venmo-widget, .venmo-widget > *, .venmo-widget option {
+  background: white;
+  border: 0px #3F94D0 solid;
+  color: #3F94D0;
+  height: 24px;
+
+  font-weight: 400;
+  font-size: 16px;
+  padding: 0;
+}
+
+.venmo-widget {
+  position: relative;
+  display: inline-block;
+  border-width: 1px;
+  border-radius: 4px;
+
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.venmo-widget .venmo-logo {
+  display: inline-block;
+
+  background: url('https://platform.venmo.com/public/images/venmo_v_blue.png');
+  background-position: 50% center;
+  background-size: 14px auto;
+  background-repeat: no-repeat;
+
+  width: 24px;
+
+  border-right-width: 1px;
+}
+
+.venmo-widget select,.venmo-widget option {
+  vertical-align: top;
+}
+
+.venmo-widget option {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.venmo-widget input[type="submit"] {
+  padding: 0 4px;
+  vertical-align: top;
+  border-radius: 0 4px 4px 0;
+  border-width: 0;
+  border-left-width: 1px;
+  min-width: 70px;
+  cursor: pointer;
+}
+
+.venmo-widget input[type="submit"]:hover,
+.venmo-widget input[type="submit"]:focus {
+  box-shadow:  2px  2px 0px 0px #76b2dd inset,
+              -2px -2px 0px 0px #76b2dd inset,
+               1px  1px 0px 0px #5aa3d7 inset,
+              -1px -1px 0px 0px #5aa3d7 inset;
+}
+
+/* Paypal Widgets */
+
+.paypal-widget select {
+  vertical-align: top;
+}

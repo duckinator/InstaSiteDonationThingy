@@ -10,7 +10,7 @@ var instaSiteDonationThingy = angular.module('instaSiteDonationThingy', []);
 instaSiteDonationThingy
   /*
    * Usage:
-   *    donationConfig(function (config) {l
+   *    donationConfig(function (config) {
    *      // ...
    *    });
    */
@@ -43,6 +43,7 @@ instaSiteDonationThingy
       });
     }])
 
+  // PayPal one-off donations widget.
   .directive('paypalWidget',
     function () {
       return {
@@ -51,10 +52,21 @@ instaSiteDonationThingy
       };
     })
 
+  // PayPal recurring donations widget.
+  .directive('paypalRecurringWidget',
+    function () {
+      return {
+        template: template('paypal-recurring'),
+        controller: 'PayPalWidgetCtrl'
+      };
+    })
+
   /* ================================ Venmo  ================================ */
   .controller('VenmoWidgetCtrl', ['$scope', 'donationConfig',
     function ($scope, donationConfig) {
       donationConfig(function (config) {
+        $scope.default = config.venmo.default;
+
         $scope.username = config.venmo.username;
       });
     }])
