@@ -1,7 +1,7 @@
 {
 "paypal":{"email": "me@marie.so"},
 "dwolla":{"username": "duckinator"},
-"moonclerk":{"url":"[MoonClerk]"},
+"moonclerk":{"url":"https://app.moonclerk.com/pay/186zxy9lb16"},
 "amazon-payments":{"??":"[Amazon Payments]"},
 "google-wallet":{"??":"[Google Wallet]"},
 "venmo":{"username":"duckinator"},
