@@ -1,183 +1,175 @@
 <!doctype html>
 <html>
-<head>
+    <head>
+        <title>InstaSiteDonationThingy</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.min.js"></script>
+        <link href="app.css" media="all" rel="stylesheet" type="text/css">
+    </head>
+    <body ng-app="instaSiteDonationThingy">
+        <main>
+            <article>
+                <h3>One-offs</h3>
+                <p></p>
+                <div paypal-widget></div>
+                <div dwolla-widget></div>
+                <div venmo-widget></div>
+            </article>
+            <article>
+                <h3>Recurring</h3>
+                <p></p>
+                <div paypal-recurring-widget></div>
+                <div moonclerk-widget></div>
+                <div amazon-payments-widget></div>
+                <div google-wallet-widget></div>
+                <div patreon-widget></div>
 
-<title>InstaSiteDonationThingy</title>
+                <!-- TEMPLATES. TEMPLATES EVERYWHEREEEEEEeeeeee -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.min.js"></script>
+                <script type="text/html" id="paypal-template">
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-widget">
+                        <input type="hidden" name="cmd" value="_donations">
+                        <input type="hidden" name="business" value="{{ email }}">
+                        <input type="hidden" name="lc" value="US">
+                        <select name="amount">
+                            <option value="5.00">$5</option>
+                            <option value="10.00">$10</option>
+                            <option value="15.00" selected>$15</option>
+                            <option value="25.00">$25</option>
+                            <option value="35.00">$35</option>
+                            <option value="50.00">$50</option>
+                            <option value="75.00">$75</option>
+                            <option value="100.00">$100</option>
+                            </select>
+                        <input type="hidden" name="currency_code" value="USD">
+                        <input type="hidden" name="no_note" value="0">
+                        <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest">
+                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                    </form>
+                </script>
 
-<link href="app.css" media="all" rel="stylesheet" type="text/css">
+                <script type="text/html" id="paypal-recurring-template">
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-widget recurring">
+                        <input type="hidden" name="cmd" value="_xclick-subscriptions">
+                        <input type="hidden" name="business" value="{{ email }}">
+                        <input type="hidden" name="lc" value="US">
+                        <input type="hidden" name="no_note" value="1">
+                        <input type="hidden" name="no_shipping" value="1">
+                        <input type="hidden" name="src" value="1">
+                        <input type="hidden" name="currency_code" value="USD">
+                        <input type="hidden" name="bn" value="PP-SubscriptionsBF:btn_subscribe_LG.gif:NonHosted">
+                        <input type="hidden" name="on0" value="">
+                        <select name="os0">
+                            <option value="Option 1">$1 USD/week</option>
+                            <option value="Option 2">$2 USD/week</option>
+                            <option value="Option 3">$5 USD/week</option>
+                            <option value="Option 4">$10 USD/week</option>
+                            <option value="Option 5" selected>$15 USD/week</option>
+                            <option value="Option 6">$25 USD/week</option>
+                            <option value="Option 7">$35 USD/week</option>
+                            <option value="Option 8">$50 USD/week</option>
+                            <option value="Option 9">$100 USD/week</option>
+                        </select>
+                        <input type="hidden" name="currency_code" value="USD">
+                        <input type="hidden" name="option_select0" value="Option 1">
+                        <input type="hidden" name="option_amount0" value="1.00">
+                        <input type="hidden" name="option_period0" value="W">
+                        <input type="hidden" name="option_frequency0" value="1">
+                        <input type="hidden" name="option_select1" value="Option 2">
+                        <input type="hidden" name="option_amount1" value="2.00">
+                        <input type="hidden" name="option_period1" value="W">
+                        <input type="hidden" name="option_frequency1" value="1">
+                        <input type="hidden" name="option_select2" value="Option 3">
+                        <input type="hidden" name="option_amount2" value="5.00">
+                        <input type="hidden" name="option_period2" value="W">
+                        <input type="hidden" name="option_frequency2" value="1">
+                        <input type="hidden" name="option_select3" value="Option 4">
+                        <input type="hidden" name="option_amount3" value="10.00">
+                        <input type="hidden" name="option_period3" value="W">
+                        <input type="hidden" name="option_frequency3" value="1">
+                        <input type="hidden" name="option_select4" value="Option 5">
+                        <input type="hidden" name="option_amount4" value="15.00">
+                        <input type="hidden" name="option_period4" value="W">
+                        <input type="hidden" name="option_frequency4" value="1">
+                        <input type="hidden" name="option_select5" value="Option 6">
+                        <input type="hidden" name="option_amount5" value="25.00">
+                        <input type="hidden" name="option_period5" value="W">
+                        <input type="hidden" name="option_frequency5" value="1">
+                        <input type="hidden" name="option_select6" value="Option 7">
+                        <input type="hidden" name="option_amount6" value="35.00">
+                        <input type="hidden" name="option_period6" value="W">
+                        <input type="hidden" name="option_frequency6" value="1">
+                        <input type="hidden" name="option_select7" value="Option 8">
+                        <input type="hidden" name="option_amount7" value="50.00">
+                        <input type="hidden" name="option_period7" value="W">
+                        <input type="hidden" name="option_frequency7" value="1">
+                        <input type="hidden" name="option_select8" value="Option 9">
+                        <input type="hidden" name="option_amount8" value="100.00">
+                        <input type="hidden" name="option_period8" value="W">
+                        <input type="hidden" name="option_frequency8" value="1">
+                        <input type="hidden" name="option_index" value="0">
+                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribe_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                    </form>
+                </script>
 
-</head>
-<body ng-app="instaSiteDonationThingy">
+                <script type="text/html" id="dwolla-template">
+                    <form action="https://www.dwolla.com/send" method="get" target="_top" class="dwolla-widget">
+                        <span class="dwolla-logo"></span>
+                        <input type="hidden" name="txn" value="pay">
+                        <input type="hidden" name="SendTo" value="{{ username }}"> 
+                        <select name="Amount">
+                            <option value="5.00">$5</option>
+                            <option value="10.00">$10</option>
+                            <option value="15.00" selected>$15</option>
+                            <option value="25.00">$25</option>
+                            <option value="35.00">$35</option>
+                            <option value="50.00">$50</option>
+                            <option value="75.00">$75</option>
+                            <option value="100.00">$100</option>
+                        </select>
+                        <input type="submit" value="Donate">
+                    </form>
+                </script>
 
-<p>One-offs:</p>
+                <script type="text/html" id="moonclerk-template">
+                    <a href="{{ url }}"><img alt="Donate" src="https://s3.amazonaws.com/moonclerk/buttons/donate.png"></a>
+                </script>
 
-<div paypal-widget></div>
+                <script type="text/html" id="amazon-payments-template">
+                    [Amazon Payments]
+                </script>
 
-<div dwolla-widget></div>
+                <script type="text/html" id="google-wallet-template">
+                    [Google Wallet]
+                </script>
 
-<div venmo-widget></div>
+                <script type="text/html" id="venmo-template">
+                  <form action="https://venmo.com/" method="get" target="_top" class="venmo-widget">
+                    <span class="venmo-logo"></span>
+                    <input type="hidden" name="txn" value="pay">
+                    <input type="hidden" name="recipients" value="{{ username }}">
+                    <input type="hidden" name="note" value="one-time donation">
+                    <input type="hidden" name="audience" value="private">
+                    <select name="amount">
+                      <option value="5.00">$5</option>
+                      <option value="10.00">$10</option>
+                      <option value="15.00" selected>$15</option>
+                      <option value="25.00">$25</option>
+                      <option value="35.00">$35</option>
+                      <option value="50.00">$50</option>
+                      <option value="75.00">$75</option>
+                      <option value="100.00">$100</option>
+                    </select>
+                    <input type="submit" value="Venmo Me">
+                  </form>
+                </script>
 
-<p>Recurring:</p>
-
-<div paypal-recurring-widget></div>
-
-<div moonclerk-widget></div>
-
-<div amazon-payments-widget></div>
-
-<div google-wallet-widget></div>
-
-<div patreon-widget></div>
-
-<!-- TEMPLATES. TEMPLATES EVERYWHEREEEEEEeeeeee -->
-
-<script type="text/html" id="paypal-template">
-  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-widget">
-    <input type="hidden" name="cmd" value="_donations">
-    <input type="hidden" name="business" value="{{ email }}">
-    <input type="hidden" name="lc" value="US">
-    <select name="amount">
-      <option value="5.00">$5</option>
-      <option value="10.00">$10</option>
-      <option value="15.00" selected>$15</option>
-      <option value="25.00">$25</option>
-      <option value="35.00">$35</option>
-      <option value="50.00">$50</option>
-      <option value="75.00">$75</option>
-      <option value="100.00">$100</option>
-    </select>
-    <input type="hidden" name="currency_code" value="USD">
-    <input type="hidden" name="no_note" value="0">
-    <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest">
-    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-  </form>
-</script>
-
-<script type="text/html" id="paypal-recurring-template">
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-widget recurring">
-  <input type="hidden" name="cmd" value="_xclick-subscriptions">
-  <input type="hidden" name="business" value="{{ email }}">
-  <input type="hidden" name="lc" value="US">
-  <input type="hidden" name="no_note" value="1">
-  <input type="hidden" name="no_shipping" value="1">
-  <input type="hidden" name="src" value="1">
-  <input type="hidden" name="currency_code" value="USD">
-  <input type="hidden" name="bn" value="PP-SubscriptionsBF:btn_subscribe_LG.gif:NonHosted">
-  <input type="hidden" name="on0" value="">
-  <select name="os0">
-    <option value="Option 1">$1 USD/week</option>
-    <option value="Option 2">$2 USD/week</option>
-    <option value="Option 3">$5 USD/week</option>
-    <option value="Option 4">$10 USD/week</option>
-    <option value="Option 5" selected>$15 USD/week</option>
-    <option value="Option 6">$25 USD/week</option>
-    <option value="Option 7">$35 USD/week</option>
-    <option value="Option 8">$50 USD/week</option>
-    <option value="Option 9">$100 USD/week</option>
-  </select>
-  <input type="hidden" name="currency_code" value="USD">
-  <input type="hidden" name="option_select0" value="Option 1">
-  <input type="hidden" name="option_amount0" value="1.00">
-  <input type="hidden" name="option_period0" value="W">
-  <input type="hidden" name="option_frequency0" value="1">
-  <input type="hidden" name="option_select1" value="Option 2">
-  <input type="hidden" name="option_amount1" value="2.00">
-  <input type="hidden" name="option_period1" value="W">
-  <input type="hidden" name="option_frequency1" value="1">
-  <input type="hidden" name="option_select2" value="Option 3">
-  <input type="hidden" name="option_amount2" value="5.00">
-  <input type="hidden" name="option_period2" value="W">
-  <input type="hidden" name="option_frequency2" value="1">
-  <input type="hidden" name="option_select3" value="Option 4">
-  <input type="hidden" name="option_amount3" value="10.00">
-  <input type="hidden" name="option_period3" value="W">
-  <input type="hidden" name="option_frequency3" value="1">
-  <input type="hidden" name="option_select4" value="Option 5">
-  <input type="hidden" name="option_amount4" value="15.00">
-  <input type="hidden" name="option_period4" value="W">
-  <input type="hidden" name="option_frequency4" value="1">
-  <input type="hidden" name="option_select5" value="Option 6">
-  <input type="hidden" name="option_amount5" value="25.00">
-  <input type="hidden" name="option_period5" value="W">
-  <input type="hidden" name="option_frequency5" value="1">
-  <input type="hidden" name="option_select6" value="Option 7">
-  <input type="hidden" name="option_amount6" value="35.00">
-  <input type="hidden" name="option_period6" value="W">
-  <input type="hidden" name="option_frequency6" value="1">
-  <input type="hidden" name="option_select7" value="Option 8">
-  <input type="hidden" name="option_amount7" value="50.00">
-  <input type="hidden" name="option_period7" value="W">
-  <input type="hidden" name="option_frequency7" value="1">
-  <input type="hidden" name="option_select8" value="Option 9">
-  <input type="hidden" name="option_amount8" value="100.00">
-  <input type="hidden" name="option_period8" value="W">
-  <input type="hidden" name="option_frequency8" value="1">
-  <input type="hidden" name="option_index" value="0">
-  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribe_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-</script>
-
-<script type="text/html" id="dwolla-template">
-  <form action="https://www.dwolla.com/send" method="get" target="_top" class="dwolla-widget">
-    <span class="dwolla-logo"></span>
-    <input type="hidden" name="txn" value="pay">
-    <input type="hidden" name="SendTo" value="{{ username }}"> 
-    <select name="Amount">
-      <option value="5.00">$5</option>
-      <option value="10.00">$10</option>
-      <option value="15.00" selected>$15</option>
-      <option value="25.00">$25</option>
-      <option value="35.00">$35</option>
-      <option value="50.00">$50</option>
-      <option value="75.00">$75</option>
-      <option value="100.00">$100</option>
-    </select>
-    <input type="submit" value="Donate">
-  </form>
-</script>
-
-<script type="text/html" id="moonclerk-template">
-<a href="{{ url }}"><img alt="Donate" src="https://s3.amazonaws.com/moonclerk/buttons/donate.png"></a>
-</script>
-
-<script type="text/html" id="amazon-payments-template">
-[Amazon Payments]
-</script>
-
-<script type="text/html" id="google-wallet-template">
-[Google Wallet]
-</script>
-
-<script type="text/html" id="venmo-template">
-  <form action="https://venmo.com/" method="get" target="_top" class="venmo-widget">
-    <span class="venmo-logo"></span>
-    <input type="hidden" name="txn" value="pay">
-    <input type="hidden" name="recipients" value="{{ username }}">
-    <input type="hidden" name="note" value="one-time donation">
-    <input type="hidden" name="audience" value="private">
-    <select name="amount">
-      <option value="5.00">$5</option>
-      <option value="10.00">$10</option>
-      <option value="15.00" selected>$15</option>
-      <option value="25.00">$25</option>
-      <option value="35.00">$35</option>
-      <option value="50.00">$50</option>
-      <option value="75.00">$75</option>
-      <option value="100.00">$100</option>
-    </select>
-    <input type="submit" value="Venmo Me">
-  </form>
-</script>
-
-<script type="text/html" id="patreon-template">
-[Patreon]
-</script>
-
-<script src="app.js"></script>
-
-</body>
+                <script type="text/html" id="patreon-template">
+                    [Patreon]
+                </script>
+            <article>
+        </main>
+        <script src="app.js"></script>
+    </body>
 </html>
