@@ -1,0 +1,16 @@
+<form action="https://www.dwolla.com/send" method="get" target="_top" class="dwolla-widget">
+    <span class="dwolla-logo"></span>
+    <input type="hidden" name="txn" value="pay">
+    <input type="hidden" name="SendTo" value="{{ username }}"> 
+    <select name="Amount">
+        <option value="5.00">$5</option>
+        <option value="10.00">$10</option>
+        <option value="15.00" selected>$15</option>
+        <option value="25.00">$25</option>
+        <option value="35.00">$35</option>
+        <option value="50.00">$50</option>
+        <option value="75.00">$75</option>
+        <option value="100.00">$100</option>
+    </select>
+    <input type="submit" value="Donate">
+</form>

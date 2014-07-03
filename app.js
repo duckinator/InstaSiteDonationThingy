@@ -4,10 +4,6 @@
 //        The only differences between the controllers is the config key.
 //        The only differences between the directives are the template and controller names.
 
-function template(id) {
-  return document.getElementById(id + "-template").innerHTML;
-}
-
 var instaSiteDonationThingy = angular.module('instaSiteDonationThingy', []);
 
 instaSiteDonationThingy
@@ -23,7 +19,7 @@ instaSiteDonationThingy
     }])
 
   /* ================================ PayPal ================================ */
-  .controller('PayPalWidgetCtrl', ['$scope', 'donationConfig',
+  .controller('PaypalWidgetCtrl', ['$scope', 'donationConfig',
     function ($scope, donationConfig) {
       donationConfig(function (config) {
         angular.extend($scope, config['paypal']);
@@ -34,7 +30,7 @@ instaSiteDonationThingy
   .directive('paypalWidget',
     function () {
       return {
-        template: template('paypal'),
+        templateUrl: 'templates/paypal.html',
         scope: {},
         controller: 'PaypalWidgetCtrl'
       };
@@ -44,7 +40,7 @@ instaSiteDonationThingy
   .directive('paypalRecurringWidget',
     function () {
       return {
-        template: template('paypal-recurring'),
+        templateUrl: 'templates/paypal-recurring.html',
         scope: {},
         controller: 'PaypalWidgetCtrl'
       };
@@ -62,7 +58,7 @@ instaSiteDonationThingy
   .directive('venmoWidget',
     function () {
       return {
-        template: template('venmo'),
+        templateUrl: 'templates/venmo.html',
         scope: {},
         controller: 'VenmoWidgetCtrl'
       };
@@ -79,7 +75,7 @@ instaSiteDonationThingy
   .directive('dwollaWidget',
     function () {
       return {
-        template: template('dwolla'),
+        templateUrl: 'templates/dwolla.html',
         scope: {},
         controller: 'DwollaWidgetCtrl'
       };
@@ -96,7 +92,7 @@ instaSiteDonationThingy
   .directive('moonclerkWidget',
     function () {
       return {
-        template: template('moonclerk'),
+        templateUrl: 'templates/moonclerk.html',
         scope: {},
         controller: 'MoonClerkWidgetCtrl'
       };
@@ -113,7 +109,7 @@ instaSiteDonationThingy
   .directive('amazonPaymentsWidget',
     function () {
       return {
-        template: template('amazon-payments'),
+        templateUrl: 'templates/amazon-payments.html',
         scope: {},
         controller: 'AmazonPaymentsWidgetCtrl'
       };
@@ -130,7 +126,7 @@ instaSiteDonationThingy
   .directive('googleWalletWidget',
     function () {
       return {
-        template: template('google-wallet'),
+        templateUrl: 'templates/google-wallet.html',
         scope: {},
         controller: 'GoogleWalletWidgetCtrl'
       };
@@ -147,7 +143,7 @@ instaSiteDonationThingy
   .directive('patreonWidget',
     function () {
       return {
-        template: template('patreon'),
+        templateUrl: 'templates/patreon.html',
         scope: {},
         controller: 'PatreonWidgetCtrl'
       };

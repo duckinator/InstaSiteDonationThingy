@@ -1,0 +1,18 @@
+<form action="https://venmo.com/" method="get" target="_top" class="venmo-widget">
+    <span class="venmo-logo"></span>
+    <input type="hidden" name="txn" value="pay">
+    <input type="hidden" name="recipients" value="{{ username }}">
+    <input type="hidden" name="note" value="one-time donation">
+    <input type="hidden" name="audience" value="private">
+    <select name="amount">
+        <option value="5.00">$5</option>
+        <option value="10.00">$10</option>
+        <option value="15.00" selected>$15</option>
+        <option value="25.00">$25</option>
+        <option value="35.00">$35</option>
+        <option value="50.00">$50</option>
+        <option value="75.00">$75</option>
+        <option value="100.00">$100</option>
+    </select>
+    <input type="submit" value="Venmo Me">
+</form>
