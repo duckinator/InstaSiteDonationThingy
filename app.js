@@ -1,6 +1,9 @@
 'use strict';
 
-// To make all of the 
+// FIXME: Get rid of the endless copypasta! I'm not even going near THAT rabbit hole right now.
+//        The only differences between the controllers is the config key.
+//        The only differences between the directives are the template and controller names.
+
 function template(id) {
   return document.getElementById(id + "-template").innerHTML;
 }
@@ -19,27 +22,11 @@ instaSiteDonationThingy
       return $http.get('config.json').success;
     }])
 
-  .factory('venmoDetails', ['$http',
-    function ($http) {
-      // FIXME: Venmo's documentation says that an access token is required,
-      //        but it doesn't *appear* to be required right now.
-      //        Odds are, this will begin to fail at some point.
-      //        I've reached out to them on Twitter (https://twitter.com/duckinator/status/482046490060529664)
-      //        in hopes of them adding a way to embed a Venmo button
-      //        based directly on username (instead of doing a lookup).
-      function venmoDetails(username, callback) {
-        return $http.get('https://api.venmo.com/v1/users/' + username).success(callback);
-      }
-
-      return venmoDetails;
-    }])
-
-
   /* ================================ PayPal ================================ */
   .controller('PayPalWidgetCtrl', ['$scope', 'donationConfig',
     function ($scope, donationConfig) {
       donationConfig(function (config) {
-        $scope.email = config.paypal.email;
+        angular.extend($scope, config['paypal']);
       });
     }])
 
@@ -48,7 +35,8 @@ instaSiteDonationThingy
     function () {
       return {
         template: template('paypal'),
-        controller: 'PayPalWidgetCtrl'
+        scope: {},
+        controller: 'PaypalWidgetCtrl'
       };
     })
 
@@ -57,7 +45,8 @@ instaSiteDonationThingy
     function () {
       return {
         template: template('paypal-recurring'),
-        controller: 'PayPalWidgetCtrl'
+        scope: {},
+        controller: 'PaypalWidgetCtrl'
       };
     })
 
@@ -65,17 +54,102 @@ instaSiteDonationThingy
   .controller('VenmoWidgetCtrl', ['$scope', 'donationConfig',
     function ($scope, donationConfig) {
       donationConfig(function (config) {
-        $scope.default = config.venmo.default;
-
-        $scope.username = config.venmo.username;
+        angular.extend($scope, config['venmo']);
       });
     }])
 
-    .directive('venmoWidget',
-      function () {
-        return {
-          template: template('venmo'),
-          controller: 'VenmoWidgetCtrl'
-        };
-      })
+  // Venmo one-off donations widget.
+  .directive('venmoWidget',
+    function () {
+      return {
+        template: template('venmo'),
+        scope: {},
+        controller: 'VenmoWidgetCtrl'
+      };
+    })
+
+  /* ================================ Dwolla ================================ */
+  .controller('DwollaWidgetCtrl', ['$scope', 'donationConfig',
+    function ($scope, donationConfig) {
+      donationConfig(function (config) {
+        angular.extend($scope, config['dwolla']);
+      });
+    }])
+
+  .directive('dwollaWidget',
+    function () {
+      return {
+        template: template('dwolla'),
+        scope: {},
+        controller: 'DwollaWidgetCtrl'
+      };
+    })
+
+  /* ============================== MoonClerk  ============================== */
+  .controller('MoonClerkWidgetCtrl', ['$scope', 'donationConfig',
+    function ($scope, donationConfig) {
+      donationConfig(function (config) {
+        angular.extend($scope, config['moonclerk']);
+      });
+    }])
+
+  .directive('moonclerkWidget',
+    function () {
+      return {
+        template: template('moonclerk'),
+        scope: {},
+        controller: 'MoonClerkWidgetCtrl'
+      };
+    })
+
+  /* =========================== Amazon Payments  =========================== */
+  .controller('AmazonPaymentsWidgetCtrl', ['$scope', 'donationConfig',
+    function ($scope, donationConfig) {
+      donationConfig(function (config) {
+        angular.extend($scope, config['amazon-payments']);
+      });
+    }])
+
+  .directive('amazonPaymentsWidget',
+    function () {
+      return {
+        template: template('amazon-payments'),
+        scope: {},
+        controller: 'AmazonPaymentsWidgetCtrl'
+      };
+    })
+
+  /* ============================ Google Wallet  ============================ */
+  .controller('GoogleWalletWidgetCtrl', ['$scope', 'donationConfig',
+    function ($scope, donationConfig) {
+      donationConfig(function (config) {
+        angular.extend($scope, config['google-wallet']);
+      });
+    }])
+
+  .directive('googleWalletWidget',
+    function () {
+      return {
+        template: template('google-wallet'),
+        scope: {},
+        controller: 'GoogleWalletWidgetCtrl'
+      };
+    })
+
+  /* =============================== Patreon  =============================== */
+  .controller('PatreonWidgetCtrl', ['$scope', 'donationConfig',
+    function ($scope, donationConfig) {
+      donationConfig(function (config) {
+        angular.extend($scope, config['patreon']);
+      });
+    }])
+
+  .directive('patreonWidget',
+    function () {
+      return {
+        template: template('patreon'),
+        scope: {},
+        controller: 'PatreonWidgetCtrl'
+      };
+    })
   ;

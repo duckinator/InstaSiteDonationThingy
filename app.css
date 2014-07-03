@@ -30,7 +30,7 @@ select::-moz-focus-inner, option::-moz-focus-inner {
 .venmo-widget .venmo-logo {
   display: inline-block;
 
-  background: url('https://platform.venmo.com/public/images/venmo_v_blue.png');
+  background: url('venmo_v_blue.png');
   background-position: 50% center;
   background-size: 14px auto;
   background-repeat: no-repeat;
