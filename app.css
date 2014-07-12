@@ -1,4 +1,6 @@
 /*
+File layout by Lynn (LCyrin on freenode or firemagelynn@gmail.com)
+
 Organization:
 
 [VARIABLES]
@@ -13,11 +15,11 @@ Organization:
         height / width
         margin and padding
         font size
-        shadows
 [MOBILE]
     mobile media queries and layout
+        the mobile version of BASE LAYOUT
 [EXTERNAL]
-    styling for external resources. ex icons and fonts
+    styling for external resources. ex icons / fonts / buttons
 */
 
 /*---------------
