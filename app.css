@@ -1,9 +1,123 @@
-button::-moz-focus-inner, input::-moz-focus-inner,
-select::-moz-focus-inner, option::-moz-focus-inner {
-  padding: 0;
-  margin: 0;
-  border: 0;
+/*
+Organization:
+
+[VARIABLES]
+    global variables
+[GLOBAL]
+    global styling
+        font
+        font style
+        colors
+[BASE LAYOUT]
+    base layout
+        height / width
+        margin and padding
+        font size
+        shadows
+[MOBILE]
+    mobile media queries and layout
+[EXTERNAL]
+    styling for external resources. ex icons and fonts
+*/
+
+/*---------------
+    VARIABLES
+-----------------*/
+
+$primary_color = #8d53a6;
+$secondary_color = green;
+$body_color = rgba(blue, 0.3);
+
+$primary_font = "Press Start 2P", cursive;
+$secondary_font = "Droid Sans Mono", sans-serif;
+
+$mobile_xy = 500px;
+
+/*---------------
+    GLOBAL
+-----------------*/
+
+a {
+    cursor: inherit;
+    color: $primary_color;
+    text-decoration: inherit;
 }
+
+nav a {color: black;}
+p a {color: $primary_color; text-shadow: 0 0 0.05em $primary_color;}
+article a:hover {text-decoration: underline;}
+h3 a {color: black;}
+h3 a:hover {text-decoration: none; color: $primary_color;}
+h3 a {transition: color 0.33s;}
+i {text-shadow: none;}
+
+h1, h2, h3, h4, h5 {
+}
+
+h1, h2, h3, h4, h5, p {
+    text-align: center;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    color: black;
+}
+
+html, body, .texture {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: $body_color;
+    overflow-x: hidden;
+    font-family: $primary_font;
+}
+
+p {
+    text-align: left;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: black;
+    box-shadow: 0 5px 5px 2px rgba($secondary_color,.3);
+}
+
+/*-------------------
+    BASE LAYOUT
+---------------------*/
+
+//this media query is just for consistency
+@media all {
+
+}
+
+/*---------------
+    MOBILE
+-----------------*/
+
+@media all and (max-height: $mobile_xy), (max-width: $mobile_xy){
+
+    html {font-size: 0.7em;}
+
+}
+
+/*---------------
+    EXTERNAL
+-----------------*/
+
+/* font awesome coloring */
+
+.fa-linkedin {color: #4875B4;}
+.fa-twitter {color: #33CCFF;}
+.fa-skype {color: #12A5F4;}
+.fa-envelope {color: gray;}
+.fa-github {color: black;}
+.fa-rss-square {color: orange;}
+.fa {font-size: 1.5em;}
 
 /* Venmo Widgets */
 
@@ -72,4 +186,13 @@ select::-moz-focus-inner, option::-moz-focus-inner {
 
 .paypal-widget select {
   vertical-align: top;
+}
+
+/* duckinator only tested on firefox ;p */
+
+button::-moz-focus-inner, input::-moz-focus-inner,
+select::-moz-focus-inner, option::-moz-focus-inner {
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
