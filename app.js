@@ -33,7 +33,7 @@ var widgetDirective = function (serviceName, variant) {
 
   return (function () {
     return {
-      templateUrl: 'templates/' + variantPart + templateUrlPart + '.html',
+      templateUrl: 'templates/' + variantPart + serviceName + '.html',
       scope: {},
       controller: controllerPart + 'WidgetCtrl'
     };
