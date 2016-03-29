@@ -6,6 +6,16 @@
 
 var instaSiteDonationThingy = angular.module('instaSiteDonationThingy', []);
 
+var widgetController = function (configKey) {
+  return ['$scope', 'donationConfig',
+    function ($scope, donationConfig) {
+      donationConfig(function (config) {
+        angular.extend($scope, config[configKey]);
+      });
+    }
+  ];
+}
+
 instaSiteDonationThingy
   /*
    * Usage:
@@ -19,12 +29,7 @@ instaSiteDonationThingy
     }])
 
   /* ================================ PayPal ================================ */
-  .controller('PaypalWidgetCtrl', ['$scope', 'donationConfig',
-    function ($scope, donationConfig) {
-      donationConfig(function (config) {
-        angular.extend($scope, config['paypal']);
-      });
-    }])
+  .controller('PaypalWidgetCtrl', widgetController('paypal'))
 
   // PayPal one-off donations widget.
   .directive('paypalWidget',
@@ -47,14 +52,7 @@ instaSiteDonationThingy
     })
 
   /* ================================ Venmo  ================================ */
-  .controller('VenmoWidgetCtrl', ['$scope', 'donationConfig',
-    function ($scope, donationConfig) {
-      donationConfig(function (config) {
-        angular.extend($scope, config['venmo']);
-      });
-    }])
-
-  // Venmo one-off donations widget.
+  .controller('VenmoWidgetCtrl', widgetController('venmo'))
   .directive('venmoWidget',
     function () {
       return {
@@ -65,13 +63,7 @@ instaSiteDonationThingy
     })
 
   /* ================================ Dwolla ================================ */
-  .controller('DwollaWidgetCtrl', ['$scope', 'donationConfig',
-    function ($scope, donationConfig) {
-      donationConfig(function (config) {
-        angular.extend($scope, config['dwolla']);
-      });
-    }])
-
+  .controller('DwollaWidgetCtrl', widgetController('dwolla'))
   .directive('dwollaWidget',
     function () {
       return {
@@ -82,14 +74,8 @@ instaSiteDonationThingy
     })
 
   /* ============================== MoonClerk  ============================== */
-  .controller('MoonClerkWidgetCtrl', ['$scope', 'donationConfig',
-    function ($scope, donationConfig) {
-      donationConfig(function (config) {
-        angular.extend($scope, config['moonclerk']);
-      });
-    }])
-
-  .directive('moonclerkWidget',
+  .controller('MoonClerkWidgetCtrl', widgetController('moonclerk'))
+  .directive('moonclerkRecurringWidget',
     function () {
       return {
         templateUrl: 'templates/moonclerk.html',
@@ -99,14 +85,8 @@ instaSiteDonationThingy
     })
 
   /* =========================== Amazon Payments  =========================== */
-  .controller('AmazonPaymentsWidgetCtrl', ['$scope', 'donationConfig',
-    function ($scope, donationConfig) {
-      donationConfig(function (config) {
-        angular.extend($scope, config['amazon-payments']);
-      });
-    }])
-
-  .directive('amazonPaymentsWidget',
+  .controller('AmazonPaymentsWidgetCtrl', widgetController('amazon-payments'))
+  .directive('amazonPaymentsRecurringWidget',
     function () {
       return {
         templateUrl: 'templates/amazon-payments.html',
@@ -116,14 +96,8 @@ instaSiteDonationThingy
     })
 
   /* ============================ Google Wallet  ============================ */
-  .controller('GoogleWalletWidgetCtrl', ['$scope', 'donationConfig',
-    function ($scope, donationConfig) {
-      donationConfig(function (config) {
-        angular.extend($scope, config['google-wallet']);
-      });
-    }])
-
-  .directive('googleWalletWidget',
+  .controller('GoogleWalletWidgetCtrl', widgetController('google-wallet'))
+  .directive('googleWalletRecurringWidget',
     function () {
       return {
         templateUrl: 'templates/google-wallet.html',
@@ -133,13 +107,7 @@ instaSiteDonationThingy
     })
 
   /* =============================== Patreon  =============================== */
-  .controller('PatreonWidgetCtrl', ['$scope', 'donationConfig',
-    function ($scope, donationConfig) {
-      donationConfig(function (config) {
-        angular.extend($scope, config['patreon']);
-      });
-    }])
-
+  .controller('PatreonWidgetCtrl', widgetController('patreon'))
   .directive('patreonWidget',
     function () {
       return {
