@@ -1,19 +1,43 @@
 'use strict';
 
-// FIXME: Get rid of the endless copypasta! I'm not even going near THAT rabbit hole right now.
-//        The only differences between the controllers is the config key.
-//        The only differences between the directives are the template and controller names.
-
 var instaSiteDonationThingy = angular.module('instaSiteDonationThingy', []);
 
-var widgetController = function (configKey) {
+// The controllers and directives are all identical aside from the service name
+// and which variant of the widget to use, so there are two helper functions
+// used when generating them.
+
+var widgetController = function (serviceName) {
   return ['$scope', 'donationConfig',
     function ($scope, donationConfig) {
       donationConfig(function (config) {
-        angular.extend($scope, config[configKey]);
+        angular.extend($scope, config[serviceName]);
       });
     }
   ];
+};
+
+var widgetDirective = function (serviceName, variant) {
+  // foo-bar-baz => FooBarBaz.
+  var controllerPart =
+    serviceName.replace(/(^|-)./g, function (x) {
+      if (x[0] == '-') {
+        x = x.slice(1);
+      }
+
+      return x.toUpperCase();
+    });
+
+  // If we pass a variant, we want templates/variant/template-url-part.html.
+  // If we don't, we want templates/template-url-part.html.
+  var variantPart = variant ? '/' + variant + '/' : '';
+
+  return (function () {
+    return {
+      templateUrl: 'templates/' + variantPart + templateUrlPart + '.html',
+      scope: {},
+      controller: controllerPart + 'WidgetCtrl'
+    };
+  });
 }
 
 instaSiteDonationThingy
@@ -28,92 +52,33 @@ instaSiteDonationThingy
       return $http.get('config.json').success;
     }])
 
-  /* ================================ PayPal ================================ */
-  .controller('PaypalWidgetCtrl', widgetController('paypal'))
+  // PayPal
+  .controller('PaypalWidgetCtrl',         widgetController('paypal'))
+  .directive('paypalWidget',              widgetDirective('paypal'))
+  .directive('paypalRecurringWidget',     widgetDirective('paypal', 'recurring'))
 
-  // PayPal one-off donations widget.
-  .directive('paypalWidget',
-    function () {
-      return {
-        templateUrl: 'templates/paypal.html',
-        scope: {},
-        controller: 'PaypalWidgetCtrl'
-      };
-    })
+  // Venmo
+  .controller('VenmoWidgetCtrl',          widgetController('venmo'))
+  .directive('venmoWidget',               widgetDirective('venmo'))
 
-  // PayPal recurring donations widget.
-  .directive('paypalRecurringWidget',
-    function () {
-      return {
-        templateUrl: 'templates/paypal-recurring.html',
-        scope: {},
-        controller: 'PaypalWidgetCtrl'
-      };
-    })
+  // Dwolla
+  .controller('DwollaWidgetCtrl',         widgetController('dwolla'))
+  .directive('dwollaWidget',              widgetDirective('dwolla'))
 
-  /* ================================ Venmo  ================================ */
-  .controller('VenmoWidgetCtrl', widgetController('venmo'))
-  .directive('venmoWidget',
-    function () {
-      return {
-        templateUrl: 'templates/venmo.html',
-        scope: {},
-        controller: 'VenmoWidgetCtrl'
-      };
-    })
+  // MoonClerk
+  .controller('MoonclerkWidgetCtrl',      widgetController('moonclerk'))
+  .directive('moonclerkRecurringWidget',  widgetDirective('moonclerk', 'recurring'))
 
-  /* ================================ Dwolla ================================ */
-  .controller('DwollaWidgetCtrl', widgetController('dwolla'))
-  .directive('dwollaWidget',
-    function () {
-      return {
-        templateUrl: 'templates/dwolla.html',
-        scope: {},
-        controller: 'DwollaWidgetCtrl'
-      };
-    })
+  // Amazon Payments
+  .controller('AmazonPaymentsWidgetCtrl',     widgetController('amazon-payments'))
+  .directive('amazonPaymentsRecurringWidget', widgetDirective('amazon-payments', 'recurring'))
 
-  /* ============================== MoonClerk  ============================== */
-  .controller('MoonClerkWidgetCtrl', widgetController('moonclerk'))
-  .directive('moonclerkRecurringWidget',
-    function () {
-      return {
-        templateUrl: 'templates/moonclerk.html',
-        scope: {},
-        controller: 'MoonClerkWidgetCtrl'
-      };
-    })
+  // Google Wallet
+  .controller('GoogleWalletWidgetCtrl',       widgetController('google-wallet'))
+  .directive('googleWalletRecurringWidget',   widgetDirective('google-wallet', 'recurring'))
 
-  /* =========================== Amazon Payments  =========================== */
-  .controller('AmazonPaymentsWidgetCtrl', widgetController('amazon-payments'))
-  .directive('amazonPaymentsRecurringWidget',
-    function () {
-      return {
-        templateUrl: 'templates/amazon-payments.html',
-        scope: {},
-        controller: 'AmazonPaymentsWidgetCtrl'
-      };
-    })
+  // Patreon
+  .controller('PatreonWidgetCtrl',        widgetController('patreon'))
+  .directive('patreonWidget',             widgetDirective('patreon', 'recurring'))
 
-  /* ============================ Google Wallet  ============================ */
-  .controller('GoogleWalletWidgetCtrl', widgetController('google-wallet'))
-  .directive('googleWalletRecurringWidget',
-    function () {
-      return {
-        templateUrl: 'templates/google-wallet.html',
-        scope: {},
-        controller: 'GoogleWalletWidgetCtrl'
-      };
-    })
-
-  /* =============================== Patreon  =============================== */
-  .controller('PatreonWidgetCtrl', widgetController('patreon'))
-  .directive('patreonWidget',
-    function () {
-      return {
-        templateUrl: 'templates/patreon.html',
-        scope: {},
-        controller: 'PatreonWidgetCtrl'
-      };
-    })
   ;
