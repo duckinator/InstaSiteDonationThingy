@@ -1,0 +1,23 @@
+{
+  "paypal": {
+    "email": "PAYPAL EMAIL ADDRESS"
+  },
+  "dwolla": {
+    "username": "DWOLLA USERNAME"
+  },
+  "moonclerk": {
+    "url": "MOONCLERK APP URL"
+  },
+  "amazon-payments": {
+    "??": "[Amazon Payments]"
+  },
+  "google-wallet": {
+    "??": "[Google Wallet]"
+  },
+  "venmo": {
+    "username": "VENMO USERNAME"
+  },
+  "patreon":{
+    "user_id": "PATREON USER ID"
+  }
+}
