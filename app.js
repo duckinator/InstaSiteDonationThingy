@@ -61,21 +61,9 @@ instaSiteDonationThingy
   .controller('VenmoWidgetCtrl',          widgetController('venmo'))
   .directive('venmoWidget',               widgetDirective('venmo'))
 
-  // Dwolla
-  .controller('DwollaWidgetCtrl',         widgetController('dwolla'))
-  .directive('dwollaWidget',              widgetDirective('dwolla'))
-
   // MoonClerk
   .controller('MoonclerkWidgetCtrl',      widgetController('moonclerk'))
   .directive('moonclerkRecurringWidget',  widgetDirective('moonclerk', 'recurring'))
-
-  // Amazon Payments
-  .controller('AmazonPaymentsWidgetCtrl',     widgetController('amazon-payments'))
-  .directive('amazonPaymentsRecurringWidget', widgetDirective('amazon-payments', 'recurring'))
-
-  // Google Wallet
-  .controller('GoogleWalletWidgetCtrl',       widgetController('google-wallet'))
-  .directive('googleWalletRecurringWidget',   widgetDirective('google-wallet', 'recurring'))
 
   // Patreon
   .controller('PatreonWidgetCtrl',        widgetController('patreon'))
